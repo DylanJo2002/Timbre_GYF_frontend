@@ -16,8 +16,13 @@ async function onConsultButton(ev, {convenio_id,trx_limit},dispath){
     dispath(update_transactions_loading({loading: true}))
     doGetTransactionsRequest(convenio_id,trx_limit)
     .then(data => {
-        dispath(update_transactions({receipt_transactions: data.receipt_transactions}));
-        dispath(update_transactions_loading({loading: false}))
+        if(data) {
+            dispath(update_transactions({receipt_transactions: data.receipt_transactions}));
+            dispath(update_transactions_loading({loading: false}))
+            return;
+        }
+        invalidToken();
+        dispath(logout());
     })
 }
 

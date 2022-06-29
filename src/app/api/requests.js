@@ -63,3 +63,22 @@ export async function doGetTransactionsRequest(convenio_id, trx_limit){
       }
     ).then(data => data);  
 }
+
+export async function doPostTransactionsRequest(receipt_id){
+    const fullUrl = `${url}${endpoints_api.transactions}?receipt_id=${receipt_id}`;
+    const config_request = {
+        method:'POST',
+        headers: {
+            Authorization: 'Bearer '+localStorage.getItem('timbre_gyf_token')
+        }
+    }    
+    return fetch(fullUrl,config_request)
+      .then((response) =>{
+        console.log(response)
+        if(response.status == 201) {
+            return response.blob();
+        }
+        return null;
+      }
+    ).then(data => data);  
+}

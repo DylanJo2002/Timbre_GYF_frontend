@@ -1,8 +1,14 @@
 import './transactionTableComponent.css'
 import {formatTime, formatDate} from '../../utils'
+import {doPostTransactionsRequest} from '../../api/requests'
 
-function onGenerateButton(receipt_id){
-    console.log("RECEIPT: "+receipt_id);
+async function onGenerateButton(receipt_id){
+    doPostTransactionsRequest(receipt_id)
+    .then(data => {
+        
+        window.open(URL.createObjectURL(data));
+
+    })
 }
 
 function TransactionTableComponent(props) {
