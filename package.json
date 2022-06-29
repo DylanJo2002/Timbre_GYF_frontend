@@ -1,19 +1,26 @@
 {
-  "name": "timbre-gyf",
-  "version": "0.1.0",
+  "name": "timbres",
+  "version": "1.0.0",
+  "description": "Proyecto de Timbres para GYF",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-loading": "^2.0.3",
+    "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
+    "react-select": "^5.3.2",
+    "react-select-search": "^3.0.10",
+    "redux": "^4.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build-prod": "react-scripts build --env_timbre=production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,0 +1,10 @@
+.logo {
+    height: 3rem;
+    width: auto;
+}
+
+.div-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

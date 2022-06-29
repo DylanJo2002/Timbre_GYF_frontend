@@ -1,0 +1,48 @@
+.background-white {
+    background-color: #ffffff;
+}
+
+.background-yellow {
+    background-color: #f7e300;
+}
+
+.background-blue {
+    background-color: #00a9ce;
+}
+
+.soft-blue {
+    color: #d0eaf8;
+}
+
+.eded {
+    color: #ededed;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+body {
+    margin: 0;
+    margin-bottom: 40px;
+}
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+input {
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+}
+
+/*BTN */
+.btn {
+    background: #01a9ce;
+    color: #fff;
+    text-transform: none;
+    border-radius: 25px;
+    border-style: none;
+    box-shadow: rgb(0, 0, 0);
+}
