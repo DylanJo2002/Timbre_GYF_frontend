@@ -1,12 +1,14 @@
 import './transactionTableComponent.css'
 import {formatTime, formatDate} from '../../utils'
 import {doPostTransactionsRequest} from '../../api/requests'
+import GenerateButtonComponent from '../generateButton/generateButtonComponent'
 
 async function onGenerateButton(receipt_id){
     doPostTransactionsRequest(receipt_id)
     .then(data => {
-        
-        window.open(URL.createObjectURL(data));
+        if(data) {
+            window.open(URL.createObjectURL(data));
+        }
 
     })
 }
@@ -36,8 +38,9 @@ function TransactionTableComponent(props) {
                                 <td>{formatDate(trx.transaction_date)}</td>
                                 <td>{formatTime(trx.transaction_date)}</td>
                                 <td>{trx.user_cnb}</td>
-                                <td><button className='btn' value={trx.id_receipt} 
-                                    onClick={ev => onGenerateButton(ev.target.value)}>Generar</button></td>
+                                <td>{<GenerateButtonComponent onClick={onGenerateButton}
+                                    value={trx.id_receipt}>
+                                    </GenerateButtonComponent>}</td>
                             </tr>
                         })
                     }
