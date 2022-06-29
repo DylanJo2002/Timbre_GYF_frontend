@@ -3,3 +3,8 @@
     height: 20rem;
     overflow-y: scroll;
 }
+
+
+.contenedor-table::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}

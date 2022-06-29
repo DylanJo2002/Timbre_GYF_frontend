@@ -2,21 +2,23 @@ import './transactionTableComponent.css'
 import {formatTime, formatDate} from '../../utils'
 import {doPostTransactionsRequest} from '../../api/requests'
 import GenerateButtonComponent from '../generateButton/generateButtonComponent'
+import {update_transactions_loading} from '../../redux/slices/sessionSlice'
 
-async function onGenerateButton(receipt_id){
+async function onGenerateButton(receipt_id, dispatch){
+    dispatch(update_transactions_loading({loading: true}));
     doPostTransactionsRequest(receipt_id)
     .then(data => {
         if(data) {
             window.open(URL.createObjectURL(data));
+            dispatch(update_transactions_loading({loading: false}));
         }
 
     })
 }
 
 function TransactionTableComponent(props) {
-
     return (
-        <div className='mt-3'>
+        <div className='mt-3 contenedor-padre-table'>
             <div className="contenedor-table mx-auto">
             <table className='w-100'>
                 <thead className='text-center'>
