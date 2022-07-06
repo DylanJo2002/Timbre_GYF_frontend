@@ -1,6 +1,9 @@
 import './principalComponent.css';
 import { connect } from "react-redux/es/exports";
-import {inpunt_changed_agreement_name,retrieve_agreements,logout,inpunt_changed_agreement_limit,update_transactions,update_transactions_loading} from '../../redux/slices/sessionSlice'
+import {logout} from '../../redux/slices/sessionSlice'
+import {inpunt_changed_agreement_name,inpunt_changed_cashier_agency
+    ,inpunt_changed_total_value,inpunt_changed_reference,clear_inputs_agreement,retrieve_agreements} from '../../redux/slices/agreementSlice'
+import {update_transactions,update_transactions_loading} from '../../redux/slices/transactionSlice'
 import { useEffect } from 'react';
 import {doGetAgreementsRequest, doGetTransactionsRequest} from '../../api/requests'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
@@ -66,12 +69,26 @@ function PrincipalComponent(props) {
 
                                         </div>
                                     
-                                        <div className="col-6 row m-0 p-0">
-                                            <label htmlFor="input-limite">Límite de transacciones</label>
-                                        </div>
-                                        <div className="col-6 row m-0 p-0">
-                                            <input name="input-limite w-50" type="number" required defaultValue={1}
-                                             onChange={ev => props.imput_change({trx_limit: ev.target.value})}/>
+                                        <div className="col-12 m-0 p-0 d-flex gap-3">
+                                            <div>
+                                                <label htmlFor="input-limite">Agencia</label>
+                                                <input name="input-limite" type="number" required defaultValue={1}
+                                                onChange={ev => props.imput_change({cashier_agency: ev.target.value})}/>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="input-limite">Valor total</label>
+                                                <input name="input-limite" type="number" required defaultValue={1}
+                                                onChange={ev => props.imput_change({total_value: ev.target.value})}/>
+                                            </div>
+                                            <div>
+                                                <div className='d-flex justify-content-around'>
+                                                    <label htmlFor="check_referencia">Referencia</label>
+                                                    <input type="checkbox" name="check_referencia"
+                                                    onChange={ev => props.imput_change({reference: {filter: ev.target.value}})}/>
+                                                </div>
+                                                <input name="input-limite" type="text" required defaultValue={1}
+                                                onChange={ev => props.imput_change({reference: {value: ev.target.value}})}/>
+                                            </div>
                                         </div>
                                 </div>
                                 <div className="mt-3">
@@ -92,13 +109,16 @@ function PrincipalComponent(props) {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-    imput_change: (payload) => {
-        if(payload.convenio_id){
-            dispatch(inpunt_changed_agreement_name(payload))
-            return;
-        }
-        dispatch(inpunt_changed_agreement_limit(payload))
-
+        imput_change: (payload) => {
+            if(typeof payload.convenio_id != 'undefined'){
+                dispatch(inpunt_changed_agreement_name(payload))
+            }else if(typeof payload.cashier_agency != 'undefined') {
+                dispatch(inpunt_changed_cashier_agency(payload));
+            }else if(typeof payload.total_value != 'undefined') {
+                dispatch(inpunt_changed_total_value(payload));
+            }else if(typeof payload.reference != 'undefined') {
+                dispatch(inpunt_changed_reference(payload));
+            }
     },
       retrieve_agreements: (payload) => dispatch(retrieve_agreements(payload))
     }

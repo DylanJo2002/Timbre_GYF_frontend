@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import {sessionSlicer, inputUserLoginSlice, agreementSlice, inputAgreementsSlice, transactionsSlice} from './slices/sessionSlice'
+import {sessionSlicer, inputUserLoginSlice} from './slices/sessionSlice'
+import {agreementSlice, inputAgreementsSlice} from './slices/agreementSlice'
+import {transactionsSlice} from './slices/transactionSlice'
 const store  = configureStore(
     {
         reducer: {

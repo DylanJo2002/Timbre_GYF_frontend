@@ -2,7 +2,7 @@ import './transactionTableComponent.css'
 import {formatTime, formatDate} from '../../utils'
 import {doPostTransactionsRequest} from '../../api/requests'
 import GenerateButtonComponent from '../generateButton/generateButtonComponent'
-import {update_transactions_loading} from '../../redux/slices/sessionSlice'
+import {update_transactions_loading} from '../../redux/slices/transactionSlice'
 
 async function onGenerateButton(receipt_id, dispatch){
     dispatch(update_transactions_loading({loading: true}));
@@ -28,7 +28,10 @@ function TransactionTableComponent(props) {
                         <th>ID TRX</th>
                         <th>FECHA</th>
                         <th>HORA</th>
-                        <th>USUARIO</th>
+                        <th>CONVENIO</th>
+                        <th>AGENCIA</th>
+                        <th>VALOR</th>
+                        <th>REFERENCIA</th>
                         <th>GENERAR</th>
                     </tr>
                     {
@@ -39,7 +42,10 @@ function TransactionTableComponent(props) {
                                 <td>{trx.id_transaction}</td>
                                 <td>{formatDate(trx.transaction_date)}</td>
                                 <td>{formatTime(trx.transaction_date)}</td>
-                                <td>{trx.user_cnb}</td>
+                                <td>{trx.code_agreement}</td>
+                                <td>{trx.cashier_agency}</td>
+                                <td>{trx.total_value}</td>
+                                <td>{trx.reference}</td>
                                 <td>{<GenerateButtonComponent onClick={onGenerateButton}
                                     value={trx.id_receipt}>
                                     </GenerateButtonComponent>}</td>
