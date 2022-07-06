@@ -14,10 +14,10 @@ import ReactLoading from 'react-loading';
 import TransactionTableComponent from '../transaction_table/transactionTableComponent'
 
 
-async function onConsultButton(ev, {convenio_id,trx_limit},dispath){
+async function onConsultButton(ev, {convenio_id, cashier_agency, total_value, reference},dispath){
     ev.preventDefault();
     dispath(update_transactions_loading({loading: true}))
-    doGetTransactionsRequest(convenio_id,trx_limit)
+    doGetTransactionsRequest(convenio_id, cashier_agency, total_value, reference)
     .then(data => {
         if(data) {
             dispath(update_transactions({receipt_transactions: data.receipt_transactions}));
@@ -50,7 +50,6 @@ function PrincipalComponent(props) {
     const agreement = useSelector(state => state.agreement);
     const loading = useSelector(state => state.transactions.loading);
     const transactions = useSelector(state => state.transactions.receipt_transactions);
-
     const options = agreements.map(agreements => {return {label: agreements.agreement_name, value: agreements.code_agreement}});
     
     return (
@@ -72,22 +71,18 @@ function PrincipalComponent(props) {
                                         <div className="col-12 m-0 p-0 d-flex gap-3">
                                             <div>
                                                 <label htmlFor="input-limite">Agencia</label>
-                                                <input name="input-limite" type="number" required defaultValue={1}
+                                                <input name="input-limite" type="number" required
                                                 onChange={ev => props.imput_change({cashier_agency: ev.target.value})}/>
                                             </div>
                                             <div>
                                                 <label htmlFor="input-limite">Valor total</label>
-                                                <input name="input-limite" type="number" required defaultValue={1}
+                                                <input name="input-limite" type="number" step="any" required defaultValue={0}
                                                 onChange={ev => props.imput_change({total_value: ev.target.value})}/>
                                             </div>
                                             <div>
-                                                <div className='d-flex justify-content-around'>
-                                                    <label htmlFor="check_referencia">Referencia</label>
-                                                    <input type="checkbox" name="check_referencia"
-                                                    onChange={ev => props.imput_change({reference: {filter: ev.target.value}})}/>
-                                                </div>
-                                                <input name="input-limite" type="text" required defaultValue={1}
-                                                onChange={ev => props.imput_change({reference: {value: ev.target.value}})}/>
+                                                <label htmlFor="input-referencia">Referencia</label>
+                                                <input name="input-referencia" type="text"
+                                                onChange={ev => props.imput_change({reference: ev.target.value})}/>
                                             </div>
                                         </div>
                                 </div>
@@ -110,6 +105,7 @@ function PrincipalComponent(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         imput_change: (payload) => {
+            console.log("PAYLOAD: "+payload);
             if(typeof payload.convenio_id != 'undefined'){
                 dispatch(inpunt_changed_agreement_name(payload))
             }else if(typeof payload.cashier_agency != 'undefined') {

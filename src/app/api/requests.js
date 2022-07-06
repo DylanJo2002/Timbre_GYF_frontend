@@ -45,8 +45,8 @@ export async function doGetAgreementsRequest(){
     ).then(data => data);  
 }
 
-export async function doGetTransactionsRequest(convenio_id, trx_limit){
-    const fullUrl = `${url}${endpoints_api.transactions}?limit=${trx_limit}&code_agreement=${convenio_id}`;
+export async function doGetTransactionsRequest(convenio_id, cashier_agency, total_value, reference){
+    const fullUrl = `${url}${endpoints_api.transactions}?code_agreement=${convenio_id}&cashier_agency=${cashier_agency}&total_value=${total_value}&reference=${reference}`;
     const config_request = {
         method:'GET',
         headers: {

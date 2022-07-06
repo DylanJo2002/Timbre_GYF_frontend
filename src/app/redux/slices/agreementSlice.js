@@ -4,10 +4,7 @@ const initialStateInputAgreements = {
     convenio_id: '',
     cashier_agency: 0,
     total_value: 0,
-    reference: {
-      filter: false,
-      value: ""
-    }
+    reference: ''
   }
   
 const initialStateAgreements = {
@@ -30,13 +27,8 @@ export const inputAgreementsSlice = createSlice({
         state.total_value = total_value;
         return state;
       },
-      inpunt_changed_reference: (state, {payload: {reference: {filter,value}}}) => {
-        if(typeof filter ==! 'undefined') {
-          state.reference.filter = filter;
-        }else if(typeof value ==! 'undefined') {
-          state.reference.value = value;
-
-        }
+      inpunt_changed_reference: (state, {payload: {reference}}) => {
+        state.reference = reference;
         return state;
       },
       clear_inputs_agreement: (state) => {
