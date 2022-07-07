@@ -45,7 +45,7 @@ function TransactionTableComponent(props) {
                                 <td>{trx.code_agreement}</td>
                                 <td>{trx.cashier_agency}</td>
                                 <td>{trx.total_value}</td>
-                                <td>{trx.reference}</td>
+                                <td>{trx.reference || "N/A"}</td>
                                 <td>{<GenerateButtonComponent onClick={onGenerateButton}
                                     value={trx.id_receipt}>
                                     </GenerateButtonComponent>}</td>
