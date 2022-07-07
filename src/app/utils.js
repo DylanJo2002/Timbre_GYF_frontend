@@ -9,7 +9,6 @@ export const sessionInfo = ()=> {
 
 export const decodeSession = () => {
     const sessionToken = localStorage.getItem('timbre_gyf_token');
-
     return sessionToken ?
         jwt_decode(sessionToken)
         :
@@ -18,7 +17,6 @@ export const decodeSession = () => {
 
 export const invalidToken = ()=> {
     localStorage.setItem('timbre_gyf_token',null);
-    alert("SU SESIÓN HA CADUCADO. POR FAVOR, INICIE SESIÓN DE NUEVO.");
 }
 
 export const formatDate = (date)=>{

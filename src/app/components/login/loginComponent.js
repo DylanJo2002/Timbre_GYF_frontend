@@ -4,20 +4,35 @@ import { connect } from "react-redux/es/exports";
 import {inpunt_change,clear_inputs,login} from '../../redux/slices/sessionSlice'
 import { useSelector } from "react-redux/es/exports";
 import { useDispatch } from "react-redux";
+import { doAlert } from "../../redux/slices/alertSlice";
 
 const onLoginButton = async ({user,password},ev,dispath)=>{
   if(user.trim() && password.trim()) {
     ev.preventDefault();
     doLoginRequest(user, password).then(data => {
-      if(data.token) {
+      if(typeof data.token === 'string') {
         localStorage.setItem('timbre_gyf_token',data.token)
         dispath(clear_inputs());
         dispath(login());
         return;
       }
-      alert(data.message);
+      dispath(doAlert({
+        show: true, 
+        severity: "error",
+        title: "Error de sesión",
+        message: "Usuario o contraseña incorrectos"
+        
+      }))
     }).catch(err => {
-      console.log(`ERR: ${err}`);
+      const error = {
+        show: true, 
+        severity: "error",
+        title: "Error fatal",
+        message: "Error al realizar la petición de inicio de sesión."
+        
+      }
+      dispath(doAlert(error))
+      console.log("ERROR LOGIN",error);
     }).finally(()=> {
       ev.preventDefault();
     })

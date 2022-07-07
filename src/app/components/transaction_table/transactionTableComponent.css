@@ -8,3 +8,7 @@
 .contenedor-table::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
 }
+
+table, tr, th,td {
+    border: solid #00a9ce;
+}

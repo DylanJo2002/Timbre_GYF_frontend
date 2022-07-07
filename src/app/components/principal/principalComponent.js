@@ -2,7 +2,7 @@ import './principalComponent.css';
 import { connect } from "react-redux/es/exports";
 import {logout} from '../../redux/slices/sessionSlice'
 import {inpunt_changed_agreement_name,inpunt_changed_cashier_agency
-    ,inpunt_changed_total_value,inpunt_changed_reference,clear_inputs_agreement,retrieve_agreements} from '../../redux/slices/agreementSlice'
+    ,inpunt_changed_total_value,inpunt_changed_reference,retrieve_agreements} from '../../redux/slices/agreementSlice'
 import {update_transactions,update_transactions_loading} from '../../redux/slices/transactionSlice'
 import { useEffect } from 'react';
 import {doGetAgreementsRequest, doGetTransactionsRequest} from '../../api/requests'
@@ -12,6 +12,7 @@ import SelectSearch from 'react-select';
 import {invalidToken} from '../../utils'
 import ReactLoading from 'react-loading';
 import TransactionTableComponent from '../transaction_table/transactionTableComponent'
+import { doAlert } from "../../redux/slices/alertSlice";
 
 
 async function onConsultButton(ev, {convenio_id, cashier_agency, total_value, reference},dispath){
@@ -25,6 +26,13 @@ async function onConsultButton(ev, {convenio_id, cashier_agency, total_value, re
             return;
         }
         invalidToken();
+        dispath(doAlert({
+            show: true, 
+            severity: "error",
+            title: "Error de sesión",
+            message: "La sesión ha caducado. Por favor, inicie sesión de nuevo."
+            
+          }))
         dispath(logout());
     })
 }
@@ -81,7 +89,7 @@ function PrincipalComponent(props) {
                                             </div>
                                             <div>
                                                 <label htmlFor="input-referencia">Referencia</label>
-                                                <input name="input-referencia" type="text"
+                                                <input name="input-referencia" type="text" placeholder='Escriba la referencia'
                                                 onChange={ev => props.imput_change({reference: ev.target.value})}/>
                                             </div>
                                         </div>
