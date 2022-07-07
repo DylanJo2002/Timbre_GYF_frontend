@@ -12,7 +12,7 @@ function App() {
   
   return (
     <>
-        <Header></Header>
+        <Header login={session}></Header>
         {firstScreen}
         <Footer></Footer>
     </>

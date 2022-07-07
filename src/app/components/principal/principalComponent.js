@@ -59,7 +59,7 @@ function PrincipalComponent(props) {
                         <div className="d-flex flex-column align-items-center container-form-principal mx-auto">
                                 <div className="row m-0 p-0 w-100">
                                         <div className='col-12 row m-0 p-0 text-center'>
-                                            <label htmlFor="select-convenio">Seleccione un convenio</label>
+                                            <label htmlFor="select-convenio">Seleccione un convenio *</label>
                                         </div>
 
                                         <div className="col-12 m-0 p-0 text-center mb-4">
@@ -70,12 +70,12 @@ function PrincipalComponent(props) {
                                     
                                         <div className="col-12 m-0 p-0 d-flex gap-3">
                                             <div>
-                                                <label htmlFor="input-limite">Agencia</label>
+                                                <label htmlFor="input-limite">Agencia *</label>
                                                 <input name="input-limite" type="number" required
                                                 onChange={ev => props.imput_change({cashier_agency: ev.target.value})}/>
                                             </div>
                                             <div>
-                                                <label htmlFor="input-limite">Valor total</label>
+                                                <label htmlFor="input-limite">Valor total *</label>
                                                 <input name="input-limite" type="number" step="any" required defaultValue={0}
                                                 onChange={ev => props.imput_change({total_value: ev.target.value})}/>
                                             </div>
@@ -86,7 +86,7 @@ function PrincipalComponent(props) {
                                             </div>
                                         </div>
                                 </div>
-                                <div className="mt-3">
+                                <div className="my-4">
                                     <button className="btn" onChange={ev => onConsultButton(ev,agreement,dispath)}>CONSULTAR</button>
                                 </div>
                         </div>

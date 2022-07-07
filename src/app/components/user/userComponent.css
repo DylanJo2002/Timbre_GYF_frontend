@@ -1,0 +1,36 @@
+.user-container {
+    right: 7vw;
+    top: 0;
+    position: absolute;
+}
+
+.user-content-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+}
+
+.user-icon-container {
+    width: fit-content;
+    height: fit-content;
+}
+.img-user {
+    height: 2.5rem;
+    width: auto;
+}
+
+.user-info-container {
+    background-color: #fd0;
+    width: fit-content;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    width: 16rem;
+}
+
+.btn-user {
+    background-color: transparent;
+    border: none;
+}

@@ -1,6 +1,5 @@
 import logo from './logo_GYF.png';
 import './footerComponent.css';
-
 function footerComponent() {
     return (
         <footer>

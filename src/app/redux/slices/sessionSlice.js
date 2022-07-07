@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import {sessionInfo} from '../../utils';
+import {sessionInfo, decodeSession} from '../../utils';
 
 const initialStateSession = {
-    value: sessionInfo()
+    value: sessionInfo(),
+    decoded: decodeSession()
 }
 
 const initialStateInputLogin = {
@@ -16,10 +17,13 @@ export const sessionSlicer = createSlice({
     initialState: initialStateSession,
     reducers: {
       login: (state) => {
-        state.value = true;
+        console.log(sessionInfo());
+        state.value = sessionInfo();
+        state.decoded = decodeSession();
       },
       logout: (state) => {
-        state.value = false;
+        state.value = null;
+        state.decoded = null;
       },
     }
   });
