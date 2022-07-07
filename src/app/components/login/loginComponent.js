@@ -5,7 +5,8 @@ import {inpunt_change,clear_inputs,login} from '../../redux/slices/sessionSlice'
 import { useSelector } from "react-redux/es/exports";
 import { useDispatch } from "react-redux";
 import { doAlert } from "../../redux/slices/alertSlice";
-
+import { credentialError } from "../../api/errors";
+import { sessionError } from "../../api/errors";
 const onLoginButton = async ({user,password},ev,dispath)=>{
   if(user.trim() && password.trim()) {
     ev.preventDefault();
@@ -16,23 +17,9 @@ const onLoginButton = async ({user,password},ev,dispath)=>{
         dispath(login());
         return;
       }
-      dispath(doAlert({
-        show: true, 
-        severity: "error",
-        title: "Error de sesión",
-        message: "Usuario o contraseña incorrectos"
-        
-      }))
+      dispath(doAlert(credentialError()));
     }).catch(err => {
-      const error = {
-        show: true, 
-        severity: "error",
-        title: "Error fatal",
-        message: "Error al realizar la petición de inicio de sesión."
-        
-      }
-      dispath(doAlert(error))
-      console.log("ERROR LOGIN",error);
+      dispath(doAlert(sessionError("inicio de sesión")))
     }).finally(()=> {
       ev.preventDefault();
     })

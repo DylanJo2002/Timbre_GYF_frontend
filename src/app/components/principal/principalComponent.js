@@ -13,7 +13,7 @@ import {invalidToken} from '../../utils'
 import ReactLoading from 'react-loading';
 import TransactionTableComponent from '../transaction_table/transactionTableComponent'
 import { doAlert } from "../../redux/slices/alertSlice";
-
+import { fetchError, sessionError } from '../../api/errors';
 
 async function onConsultButton(ev, {convenio_id, cashier_agency, total_value, reference},dispath){
     ev.preventDefault();
@@ -26,14 +26,11 @@ async function onConsultButton(ev, {convenio_id, cashier_agency, total_value, re
             return;
         }
         invalidToken();
-        dispath(doAlert({
-            show: true, 
-            severity: "error",
-            title: "Error de sesión",
-            message: "La sesión ha caducado. Por favor, inicie sesión de nuevo."
-            
-          }))
+        dispath(doAlert(sessionError()))
         dispath(logout());
+    })
+    .catch(err => {
+        dispath(doAlert(fetchError("consulta de transacciones")))
     })
 }
 
@@ -45,9 +42,12 @@ function onLoadComponent(dispath){
                 return; 
             }
             invalidToken();
+            dispath(doAlert(sessionError()))
             dispath(logout());
         }
-    );
+    ).catch(err => {
+        dispath(doAlert(fetchError("consulta de convenios")))
+    });
 }
 
 function PrincipalComponent(props) {

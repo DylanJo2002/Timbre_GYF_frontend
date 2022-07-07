@@ -17,7 +17,6 @@ export const sessionSlicer = createSlice({
     initialState: initialStateSession,
     reducers: {
       login: (state) => {
-        console.log(sessionInfo());
         state.value = sessionInfo();
         state.decoded = decodeSession();
       },

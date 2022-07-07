@@ -10,8 +10,7 @@ import { formatDate, formatTime } from '../../utils';
 const UserComponenet = () => {
     const [collapse, setCollapse] = useState(true);
     const {decoded: {sub, iat} } = useSelector(state => state.session);
-    const date = new Date();
-    date.setUTCMilliseconds(iat);
+    const date = new Date(iat*1000);
     const string_date =  formatDate(date);
     const string_time =  formatTime(date);
 

@@ -16,7 +16,7 @@ export const decodeSession = () => {
 }
 
 export const invalidToken = ()=> {
-    localStorage.setItem('timbre_gyf_token',null);
+    localStorage.removeItem('timbre_gyf_token');
 }
 
 export const formatDate = (date)=>{
@@ -27,4 +27,14 @@ export const formatDate = (date)=>{
 
 export const formatTime= (date)=>{
     return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+}
+
+export const formatDateToTable = (date) => {
+    const date_divided = date.split('T')[0];
+    return date_divided;
+}
+
+export const formatTimeToTable = (time) => {
+    const time_divided = time.split('T')[1].substring(0,8);
+    return time_divided;
 }

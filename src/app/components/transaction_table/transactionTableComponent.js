@@ -1,5 +1,5 @@
 import './transactionTableComponent.css'
-import {formatTime, formatDate} from '../../utils'
+import {formatTimeToTable, formatDateToTable} from '../../utils'
 import {doPostTransactionsRequest} from '../../api/requests'
 import GenerateButtonComponent from '../generateButton/generateButtonComponent'
 import {update_transactions_loading} from '../../redux/slices/transactionSlice'
@@ -40,8 +40,8 @@ function TransactionTableComponent(props) {
                                 <td>{index+1}</td>
                                 <td>{trx.id_receipt}</td>
                                 <td>{trx.id_transaction}</td>
-                                <td>{formatDate(trx.transaction_date)}</td>
-                                <td>{formatTime(trx.transaction_date)}</td>
+                                <td>{formatDateToTable(trx.transaction_date)}</td>
+                                <td>{formatTimeToTable(trx.transaction_date)}</td>
                                 <td>{trx.code_agreement}</td>
                                 <td>{trx.cashier_agency}</td>
                                 <td>{trx.total_value}</td>
