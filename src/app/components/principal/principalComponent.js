@@ -71,7 +71,7 @@ function PrincipalComponent(props) {
                                         <div className="col-12 m-0 p-0 d-flex gap-3">
                                             <div>
                                                 <label htmlFor="input-limite">Agencia *</label>
-                                                <input name="input-limite" type="number" required
+                                                <input name="input-limite" type="number" required defaultValue={0}
                                                 onChange={ev => props.imput_change({cashier_agency: ev.target.value})}/>
                                             </div>
                                             <div>
