@@ -20,13 +20,17 @@ export const invalidToken = ()=> {
 }
 
 export const formatDate = (date)=>{
-    const month = date.getMonth().length >=10 ? date.getMonth() : "0"+date.getMonth();
+    const month = date.getMonth() >=10 ? date.getMonth() : "0"+date.getMonth();
     const day = date.getDate() >= 10 ? date.getDate() : "0"+date.getDate();
     return `${date.getFullYear()}/${month}/${day}`
 }
 
 export const formatTime= (date)=>{
-    return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    const hour = date.getHours() >= 10 ? date.getHours() : "0"+date.getHours();
+    const minutes = date.getMinutes() >= 10 ? date.getMinutes() : "0"+date.getMinutes();
+    const secounds = date.getSeconds() >= 10 ? date.getSeconds() : "0"+date.getSeconds();
+
+    return `${hour}:${minutes}:${secounds}`
 }
 
 export const formatDateToTable = (date) => {
